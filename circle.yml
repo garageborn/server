@@ -1,0 +1,21 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  cache_directories:
+    - ~/docker
+
+deployment:
+  hub:
+    branch: features/docker
+    commands:
+      - eval `aws ecr get-login`
+      - docker-machine
+      # - ./.docker/build.sh
+      # - ./.docker/push.sh
+
+test:
+  override:
+    - echo 'Skip'
+    # - RAILS_ENV=test bundle exec rspec -r rspec_junit_formatter --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml
