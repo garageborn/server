@@ -1,6 +1,6 @@
 machine:
   services:
-    - docker-machine
+    - docker
 
 dependencies:
   cache_directories:
@@ -11,7 +11,8 @@ deployment:
     branch: features/docker
     commands:
       - eval `aws ecr get-login`
-      - docker-machine
+      - which docker
+      - which docker-machine
       # - ./.docker/build.sh
       # - ./.docker/push.sh
 
