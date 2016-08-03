@@ -1,0 +1,47 @@
+version: '2'
+services:
+  # db:
+  #   image: postgres:9.4.1
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - /srv/docker/postgresql:/var/lib/postgresql
+
+  api:
+    image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-api:latest
+    command: bash -c "bin/rails server --port 3000 --binding 0.0.0.0"
+    ports:
+      - "3000:3000"
+    # links:
+    #   - db
+    # volumes:
+    #   - .:/myapp
+    environment:
+      - RAILS_ENV
+      - DB_HOSTNAME
+      - DB_PORT
+      - DB_NAME
+      - DB_USERNAME
+      - DB_PASSWORD
+      - DB_POOL
+      - ELASTICSEARCH_URL
+
+      # AWS
+      - AWS_ACCESS_KEY_ID
+      - AWS_DEFAULT_REGION
+      - AWS_SECRET_ACCESS_KEY
+      - S3_BUCKET_NAME
+
+      # Services
+      - CLOUDINARY_CLOUD_NAME
+      - CLOUDINARY_API_KEY
+      - CLOUDINARY_API_SECRET
+      - EMBEDLY_TOKEN
+      - LOGGLY_TOKEN
+      - BUZZSUMO_TOKEN
+
+      # mttrs-api
+      - MTTRS_API_SENTRY_DNS
+      - SECRET_KEY_BASE
+      - MTTRS_ADMIN_USERNAME
+      - MTTRS_ADMIN_PASSWORD
