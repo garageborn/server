@@ -9,6 +9,7 @@ dependencies:
 
   cache_directories:
     - ~/docker
+    - ~/bin
 
 deployment:
   hub:
@@ -17,8 +18,16 @@ deployment:
       - eval `aws ecr get-login`
       - docker --version
       - ~/bin/docker-machine --version
+      - echo $PWD
+
       # - ./.docker/build.sh
       # - ./.docker/push.sh
+      # export DOCKER_TLS_VERIFY="1"
+      # export DOCKER_HOST="tcp://54.196.215.148:2376"
+      # export DOCKER_CERT_PATH="./machines/app.production"
+      # export DOCKER_MACHINE_NAME="app.production"
+      # # Run this command to configure your shell:
+      # # eval $(docker-machine env app.production)
 
 test:
   override:
