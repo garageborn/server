@@ -11,7 +11,7 @@ deployment:
     branch: features/docker
     commands:
       - eval `aws ecr get-login`
-      - which docker
+      - docker --version
       - which docker-machine
       # - ./.docker/build.sh
       # - ./.docker/push.sh
