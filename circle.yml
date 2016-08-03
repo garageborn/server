@@ -25,6 +25,7 @@ deployment:
       - export DOCKER_MACHINE_NAME="app.production"
       # # Run this command to configure your shell:
       - eval $(docker-machine env app.production)
+      - docker-machine
 
 test:
   override:
