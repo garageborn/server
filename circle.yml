@@ -20,6 +20,7 @@ deployment:
       - ~/bin/docker-machine --version
       - echo $PWD
 
+
       # - ./.docker/build.sh
       # - ./.docker/push.sh
       # export DOCKER_TLS_VERIFY="1"
