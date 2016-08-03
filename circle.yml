@@ -4,8 +4,8 @@ machine:
 
 dependencies:
   pre:
-    - curl -L https://github.com/docker/machine/releases/download/v0.7.0/docker-machine-`uname -s`-`uname -m` > /usr/local/bin/docker-machine
-    - chmod +x /usr/local/bin/docker-machine
+    - curl -L https://github.com/docker/machine/releases/download/v0.7.0/docker-machine-`uname -s`-`uname -m` > ~/bin/docker-machine
+    - chmod +x ~/bin/docker-machine
 
   cache_directories:
     - ~/docker
@@ -16,7 +16,7 @@ deployment:
     commands:
       - eval `aws ecr get-login`
       - docker --version
-      - which docker-machine
+      - ~/bin/docker-machine --version
       # - ./.docker/build.sh
       # - ./.docker/push.sh
 
