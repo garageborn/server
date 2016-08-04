@@ -6,8 +6,6 @@
 
 dependencies:
   pre:
-    # - wget -qO- https://get.docker.com/ | sh
-    - curl -fsSL https://get.docker.com/ | sh
     - curl -L https://github.com/docker/machine/releases/download/v0.8.0/docker-machine-`uname -s`-`uname -m` > ~/bin/docker-machine
     - curl -L https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m` > ~/bin/docker-compose
     - chmod +x ~/bin/docker-machine ~/bin/docker-compose
@@ -24,6 +22,10 @@ deployment:
       - docker-machine --version
       - docker-compose --version
       - docker-machine --storage-path docker/machine ls
+      - export DOCKER_TLS_VERIFY="1"
+      - export DOCKER_HOST="tcp://52.20.45.85:2376"
+      - export DOCKER_CERT_PATH="docker/machine/machines/app.production"
+      - export DOCKER_MACHINE_NAME="app.production"
       - eval $(docker-machine --storage-path docker/machine env app.production)
       - docker-compose ps
       - docker-compose ps
