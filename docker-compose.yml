@@ -1,19 +1,19 @@
 version: '2'
 services:
-  # db:
-  #   image: postgres:9.4.1
-  #   ports:
-  #     - "5432:5432"
-  #   volumes:
-  #     - /srv/docker/postgresql:/var/lib/postgresql
+  redis:
+    image: redis:3.0.7
+    ports:
+      - '6379:6379'
+    volumes:
+      - /srv/docker/redis:/data
 
   api:
     image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-api:latest
     command: bash -c "bin/rails server --port 3000 --binding 0.0.0.0"
     ports:
-      - "3000:3000"
-    # links:
-    #   - db
+      - '3000:3000'
+    links:
+      - redis
     # volumes:
     #   - .:/myapp
     env_file:
