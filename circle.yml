@@ -26,7 +26,6 @@ deployment:
       - docker-machine --storage-path docker/machine ls
       - eval $(docker-machine --storage-path docker/machine env app.production)
       - docker-compose ps
-      - docker-machine --storage-path docker/machine start app.production
       - docker-compose ps
       - bundle exec rake deploy
 
