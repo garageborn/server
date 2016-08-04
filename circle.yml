@@ -20,7 +20,7 @@ deployment:
       - docker-machine --storage-path docker/machine ls
       - eval $(docker-machine --storage-path docker/machine env app.production)
       - docker-compose --version
-      - ~/bin/docker-compose --version
+      - docker --version
       - docker-compose up -d
 
 test:
