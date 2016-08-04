@@ -21,8 +21,6 @@ deployment:
       - eval `aws ecr get-login`
       - docker-machine --storage-path docker/machine ls
       - eval $(docker-machine --storage-path docker/machine env app.production)
-      - docker-compose --version
-      - docker --version
       - docker-compose up -d
 
 test:
