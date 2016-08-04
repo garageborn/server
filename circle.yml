@@ -19,8 +19,8 @@ deployment:
       - docker --version
       - ~/bin/docker-machine --version
       - echo $PWD
-      - export DOCKER_TLS_VERIFY="1" && export DOCKER_HOST="tcp://54.196.215.148:2376" && export DOCKER_CERT_PATH="$PWD/machines/app.production" && export DOCKER_MACHINE_NAME="app.production" && eval $(docker-machine env app.production)
       - docker-machine ls
+      - docker-machine --storage-path docker/machine ls
 
 test:
   override:
