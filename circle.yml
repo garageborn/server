@@ -1,8 +1,8 @@
-# machine:
-#   pre:
-#     - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
-#   services:
-#     - docker
+machine:
+  pre:
+    - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
+  services:
+    - docker
 
 dependencies:
   pre:
@@ -19,6 +19,7 @@ deployment:
     branch: features/docker
     commands:
       - docker-machine --storage-path docker/machine ls
+      - docker-machine --storage-path docker/machine start app.production
       - eval $(docker-machine --storage-path docker/machine env app.production)
       - docker-compose ps
       - bundle exec rake deploy
