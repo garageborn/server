@@ -1,11 +1,12 @@
-machine:
-  pre:
-    - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
-  services:
-    - docker
+# machine:
+#   pre:
+#     - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
+#   services:
+#     - docker
 
 dependencies:
   pre:
+    - wget -qO- https://get.docker.com/ | sh
     - curl -L https://github.com/docker/machine/releases/download/v0.8.0/docker-machine-`uname -s`-`uname -m` > ~/bin/docker-machine
     - curl -L https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m` > ~/bin/docker-compose
     - chmod +x ~/bin/docker-machine ~/bin/docker-compose
@@ -18,6 +19,7 @@ deployment:
   hub:
     branch: features/docker
     commands:
+      - docker --version
       - docker-machine --storage-path docker/machine ls
       - docker-machine --storage-path docker/machine start app.production
       - eval $(docker-machine --storage-path docker/machine env app.production)
