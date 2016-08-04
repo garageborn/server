@@ -21,6 +21,7 @@ deployment:
       - echo $PWD
       - docker-machine ls
       - docker-machine --storage-path docker/machine ls
+      - docker-machine --storage-path batata ls
 
 test:
   override:
