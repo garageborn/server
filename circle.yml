@@ -19,6 +19,7 @@ deployment:
       - docker --version
       - ~/bin/docker-machine --version
       - echo $PWD
+      - ls -la
       - docker-machine ls
       - docker-machine --storage-path docker/machine ls
       - docker-machine --storage-path batata ls
