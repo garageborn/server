@@ -22,5 +22,3 @@ desc 'Deploy'
 task :deploy do
   Rake::Task['deploy:run'].invoke
 end
-
-Dir.glob('lib/deploy/tasks/*.rake').each { |r| load r }
