@@ -11,17 +11,15 @@ dependencies:
     - chmod +x ~/bin/docker-machine ~/bin/docker-compose
 
   cache_directories:
-    - ~/docker
+    - /tmp/docker
     - ~/bin
 
 deployment:
   hub:
     branch: features/docker
     commands:
-      - eval `aws ecr get-login`
       - docker-machine --storage-path docker/machine ls
-      - eval $(docker-machine --storage-path docker/machine env app.production)
-      - docker-compose up -d
+      - bundle exec rake deploy
 
 test:
   override:

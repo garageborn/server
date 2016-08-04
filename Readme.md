@@ -12,3 +12,9 @@ docker-machine -D create  \
   --amazonec2-zone d \
   app.production
 ```
+
+```
+docker-machine --storage-path docker/machine ls
+docker-machine --storage-path docker/machine env app.production
+eval $(docker-machine --storage-path docker/machine env app.production)
+```
