@@ -18,7 +18,7 @@ deployment:
       - eval `aws ecr get-login`
       - docker-machine --storage-path docker/machine ls
       - eval $(docker-machine --storage-path docker/machine env app.production)
-      - which docker-compose
+      - docker-compose up -d
 
 test:
   override:
