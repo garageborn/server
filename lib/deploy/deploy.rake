@@ -9,7 +9,7 @@ namespace :deploy do
 
   desc 'Publish application'
   task :publish do
-    system 'docker-compose up -d'
+    system 'docker-compose up -d --force-recreate --remove-orphans'
   end
 
   task :run do
