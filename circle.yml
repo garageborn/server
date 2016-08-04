@@ -20,7 +20,7 @@ deployment:
       - ~/bin/docker-machine --version
       - echo $PWD
       - ls -la
-      - export MACHINE_STORAGE_PATH=docker/machine
+      - export MACHINE_STORAGE_PATH=$PWD/docker/machine
       - docker-machine ls
       - docker-machine --storage-path docker/machine ls
       - docker-machine --storage-path batata ls
