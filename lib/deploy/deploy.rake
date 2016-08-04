@@ -1,8 +1,8 @@
 namespace :deploy do
   desc 'Load aws login'
   task :setup do
-    puts `docker-machine --storage-path docker/machine env app.production`
-    puts `eval $(docker-machine --storage-path docker/machine env app.production)`
+    # puts `docker-machine --storage-path docker/machine env app.production`
+    # puts `eval $(docker-machine --storage-path docker/machine env app.production)`
     puts `docker-compose ps`
     system <<-CMD
       eval `aws ecr get-login`
