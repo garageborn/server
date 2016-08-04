@@ -4,7 +4,7 @@ machine:
 
 dependencies:
   pre:
-    - curl -L https://github.com/docker/machine/releases/download/v0.7.0/docker-machine-`uname -s`-`uname -m` > ~/bin/docker-machine
+    - curl -L https://github.com/docker/machine/releases/download/v0.8.0/docker-machine-`uname -s`-`uname -m` > ~/bin/docker-machine
     - chmod +x ~/bin/docker-machine
 
   cache_directories:
