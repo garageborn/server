@@ -16,16 +16,10 @@ deployment:
     branch: features/docker
     commands:
       - eval `aws ecr get-login`
-      - docker --version
-      - ~/bin/docker-machine --version
-      - echo $PWD
-      - ls -la
-      - export MACHINE_STORAGE_PATH=$PWD/docker/machine
-      - docker-machine ls
       - docker-machine --storage-path docker/machine ls
-      - docker-machine --storage-path batata ls
+      - eval $(docker-machine --storage-path docker/machine env app.production)
+      - which docker-compose
 
 test:
   override:
     - echo 'Skip'
-    # - RAILS_ENV=test bundle exec rspec -r rspec_junit_formatter --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml
