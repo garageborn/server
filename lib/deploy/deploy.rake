@@ -1,8 +1,17 @@
 namespace :deploy do
+  def compose_command
+    <<-CMD
+      docker-compose \
+        --tls \
+        --tlscacert docker/machine/machines/app.production/ca.pem \
+        --tlscert docker/machine/machines/app.production/cert.pem \
+        --tlskey docker/machine/machines/app.production/key.pem \
+        --host tcp://52.20.45.85:2376 \
+    CMD
+  end
+
   desc 'Load aws login'
   task :setup do
-    # puts `docker-machine --storage-path docker/machine env app.production`
-    # puts `eval $(docker-machine --storage-path docker/machine env app.production)`
     puts `docker-compose ps`
     system <<-CMD
       eval `aws ecr get-login`
@@ -12,7 +21,7 @@ namespace :deploy do
 
   desc 'Publish application'
   task :publish do
-    system 'docker-compose up -d --force-recreate --remove-orphans'
+    system "#{ compose_command } up -d --force-recreate --remove-orphans"
   end
 
   task :run do

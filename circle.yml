@@ -17,18 +17,6 @@ deployment:
   hub:
     branch: features/docker
     commands:
-      - docker --version
-      - docker-machine --version
-      - docker-compose --version
-      - docker-machine --storage-path docker/machine ls
-      - export DOCKER_TLS_VERIFY="1"
-      - export DOCKER_HOST="tcp://52.20.45.85:2376"
-      - export DOCKER_CERT_PATH="docker/machine/machines/app.production"
-      - export DOCKER_MACHINE_NAME="app.production"
-      - eval $(docker-machine --storage-path docker/machine env app.production)
-      - docker-compose --host tcp://52.20.45.85:2376 ps
-      - docker-compose ps
-      - docker-compose ps
       - bundle exec rake deploy
 
 test:
