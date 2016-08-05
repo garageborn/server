@@ -28,6 +28,18 @@ services:
     volumes:
       - /srv/docker/api/public/assets:/mttrs-api/public/assets
 
+  frontend:
+    image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-frontend:latest
+    command: bash -c "npm run build-web && node build/web/server/server.js"
+    ports:
+      - '4001:4001'
+    links:
+      - api
+    env_file:
+      - production.env
+    volumes:
+      - /srv/docker/frontend/web/public/static:/mttrs-frontend/web/public/static
+
   worker:
     image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-api:latest
     command: bash -c "printenv | sed 's/^\(.*\)/export \1/g' >> ~/.bashrc && bundle exec whenever -f config/schedule/production.rb --update-crontab && service cron start && bundle exec sidekiq"
@@ -43,3 +55,4 @@ services:
       - '80:80'
     links:
       - api
+      - frontend
