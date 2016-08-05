@@ -27,7 +27,7 @@ services:
 
   worker:
     image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-api:latest
-    command: bash -c "bundle exec sidekiq"
+    command: bash -c "bundle exec whenever -f config/schedule/production.rb --update-crontab && bundle exec sidekiq"
     links:
       - redis
       - elasticsearch
