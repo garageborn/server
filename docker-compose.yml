@@ -16,16 +16,16 @@ services:
 
   api:
     image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-api:latest
-    command: bash -c "bin/rails server --port 3000 --binding 0.0.0.0"
+    command: bash -c "bin/rails assets:precompile && bin/rails server --port 3000 --binding 0.0.0.0"
     ports:
-      - '80:3000'
+      - '3000:3000'
     links:
       - redis
       - elasticsearch
     env_file:
       - production.env
 
-  sidekiq:
+  worker:
     image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-api:latest
     command: bash -c "bundle exec sidekiq"
     links:
@@ -33,3 +33,10 @@ services:
       - elasticsearch
     env_file:
       - production.env
+
+  web:
+    build: docker/images/web
+    ports:
+      - '80:80'
+    links:
+      - api
