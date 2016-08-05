@@ -1,22 +1,7 @@
 namespace :deploy do
-  def compose_command
-    <<-CMD
-      docker-compose \
-        --tls \
-        --tlscacert docker/machine/machines/app.production/ca.pem \
-        --tlscert docker/machine/machines/app.production/cert.pem \
-        --tlskey docker/machine/machines/app.production/key.pem \
-        --host tcp://52.20.45.85:2376 \
-    CMD
-  end
-
   desc 'Load aws login'
   task :setup do
-    puts `docker-compose ps`
-    system <<-CMD
-      eval `aws ecr get-login`
-      eval $(docker-machine --storage-path docker/machine env app.production)
-    CMD
+    system "eval `aws ecr get-login`"
   end
 
   desc 'Publish application'
@@ -33,4 +18,18 @@ end
 desc 'Deploy'
 task :deploy do
   Rake::Task['deploy:run'].invoke
+end
+
+def compose_command
+  env = `docker-machine --storage-path docker/machine env app.production`
+  host = env.scan(/tcp:\/\/.*\:2376/).first
+  command = <<-CMD
+    docker-compose \
+      --tlsverify \
+      --tlscacert docker/machine/machines/app.production/ca.pem \
+      --tlscert docker/machine/machines/app.production/cert.pem \
+      --tlskey docker/machine/machines/app.production/key.pem \
+      --host #{ host }
+  CMD
+  command.chomp
 end
