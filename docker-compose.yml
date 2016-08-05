@@ -1,7 +1,8 @@
 version: '2'
 services:
   redis:
-    image: redis:3.2
+    image: redis:3.2.3
+    command: redis-server --appendonly yes
     ports:
       - '6379:6379'
     volumes:
@@ -24,10 +25,12 @@ services:
       - elasticsearch
     env_file:
       - production.env
+    volumes:
+      - /srv/docker/api/public/assets:/mttrs-api/public/assets
 
   worker:
     image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-api:latest
-    command: bash -c "bundle exec whenever -f config/schedule/production.rb --update-crontab && bundle exec sidekiq"
+    command: bash -c "printenv | sed 's/^\(.*\)/export \1/g' >> ~/.bashrc && bundle exec whenever -f config/schedule/production.rb --update-crontab && crontab -f & bundle exec sidekiq"
     links:
       - redis
       - elasticsearch
