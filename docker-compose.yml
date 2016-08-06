@@ -1,0 +1,61 @@
+version: '2'
+services:
+  redis:
+    image: redis:3.2.3
+    command: redis-server --appendonly yes
+    ports:
+      - '6379:6379'
+    volumes:
+      - /srv/docker/redis:/data
+
+  elasticsearch:
+    image: elasticsearch:2.3.5
+    ports:
+      - '9200:9200'
+    volumes:
+      - /srv/docker/elasticsearch:/usr/share/elasticsearch/data
+
+  api:
+    image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-api:latest
+    command: bash -c "bin/rails assets:precompile && bin/rails server --port 3000 --binding 0.0.0.0"
+    ports:
+      - '3000:3000'
+    links:
+      - redis
+      - elasticsearch
+    env_file:
+      - production.env
+    volumes:
+      - /srv/docker/api/public/assets:/mttrs-api/public/assets
+
+  frontend:
+    image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-frontend:latest
+    command: bash -c "npm run build-web && node build/web/server/server.js"
+    ports:
+      - '4001:4001'
+    links:
+      - api
+    env_file:
+      - production.env
+    volumes:
+      - /srv/docker/frontend/web/public/static:/mttrs-frontend/web/public/static
+
+  worker:
+    image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-api:latest
+    command: bash -c "printenv | sed 's/^\(.*\)/export \1/g' >> ~/.bashrc && bundle exec whenever -f config/schedule/production.rb --update-crontab && service cron start && bundle exec sidekiq"
+    links:
+      - redis
+      - elasticsearch
+    env_file:
+      - production.env
+
+  web:
+    build: docker/images/web
+    ports:
+      - '80:80'
+    links:
+      - api
+      - frontend
+    volumes:
+      - /srv/docker/api/public/assets:/mttrs-api/public/assets
+      - /srv/docker/frontend/web/public/static:/mttrs-frontend/web/public/static
