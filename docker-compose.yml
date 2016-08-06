@@ -56,3 +56,6 @@ services:
     links:
       - api
       - frontend
+    volumes:
+      - /srv/docker/api/public/assets:/mttrs-api/public/assets
+      - /srv/docker/frontend/web/public/static:/mttrs-frontend/web/public/static
