@@ -9,7 +9,7 @@ dependencies:
 
 deployment:
   hub:
-    branch: features/docker
+    branch: master
     commands:
       - bundle exec rake deploy
 
