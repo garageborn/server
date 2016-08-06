@@ -1,7 +1,7 @@
 {
     "ConfigVersion": 3,
     "Driver": {
-        "IPAddress": "52.20.45.85",
+        "IPAddress": "app.server.mtt.rs",
         "MachineName": "app.production",
         "SSHUser": "ubuntu",
         "SSHPort": 22,
