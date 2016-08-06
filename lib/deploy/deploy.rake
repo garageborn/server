@@ -6,7 +6,7 @@ namespace :deploy do
 
   desc 'Publish application'
   task :publish do
-    system "#{ compose_command } up -d --force-recreate --remove-orphans"
+    system "#{ compose_command } up -d --build --force-recreate --remove-orphans"
   end
 
   task :run do
