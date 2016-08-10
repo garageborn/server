@@ -63,6 +63,7 @@ services:
     volumes:
       - /srv/docker/api/public/assets:/mttrs-api/public/assets
       - /srv/docker/frontend/web/public/static:/mttrs-frontend/web/public/static
+      - /srv/docker/gb/build:/gb/build
 
   proxy:
     image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/proxy:latest
