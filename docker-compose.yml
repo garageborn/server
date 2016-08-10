@@ -29,8 +29,7 @@ services:
       - /srv/docker/api/public/assets:/mttrs-api/public/assets
 
   frontend:
-    image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-frontend:latest
-    command: bash -c "npm run build-web && node build/web/server/server.js"
+    build: docker/images/frontend
     ports:
       - '4001:4001'
     links:
@@ -59,3 +58,10 @@ services:
     volumes:
       - /srv/docker/api/public/assets:/mttrs-api/public/assets
       - /srv/docker/frontend/web/public/static:/mttrs-frontend/web/public/static
+
+  proxy:
+    build: docker/images/proxy
+    links:
+      - redis
+    env_file:
+      - docker/images/proxy/env
