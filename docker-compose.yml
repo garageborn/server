@@ -21,8 +21,8 @@ services:
     ports:
       - '3000:3000'
     links:
-      - redis
       - elasticsearch
+      - redis
     env_file:
       - production.env
     volumes:
@@ -43,8 +43,8 @@ services:
     image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-api:latest
     command: bash -c "printenv | sed 's/^\(.*\)/export \1/g' >> ~/.bashrc && bundle exec whenever -f config/schedule/production.rb --update-crontab && service cron start && bundle exec sidekiq"
     links:
-      - redis
       - elasticsearch
+      - redis
     env_file:
       - production.env
 
@@ -55,13 +55,15 @@ services:
     links:
       - api
       - frontend
+      - proxy
     volumes:
       - /srv/docker/api/public/assets:/mttrs-api/public/assets
       - /srv/docker/frontend/web/public/static:/mttrs-frontend/web/public/static
 
   proxy:
-    build: docker/images/proxy
+    build: 845270614438.dkr.ecr.us-east-1.amazonaws.com/proxy:latest
+    command: bash -c "bin/puma -C config/puma.rb"
     links:
       - redis
     env_file:
-      - docker/images/proxy/env
+      - production.env
