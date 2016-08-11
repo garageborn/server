@@ -1,5 +1,14 @@
 # Create Docker Machine
 
+### Setup
+
+```
+brew install docker docker-compose docker-machine direnv
+echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
+direnv allow
+```
+
+
 ```
 docker-machine -D create  \
   --driver amazonec2 \
