@@ -1,6 +1,7 @@
 namespace :deploy do
   desc 'Load aws login'
   task :setup do
+    puts `aws ecr get-login`
     system "eval `aws ecr get-login`"
   end
 
