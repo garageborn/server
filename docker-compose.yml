@@ -23,7 +23,6 @@ services:
     links:
       - elasticsearch:elasticsearch.server
       - redis:redis.server
-      - proxy:proxy.server
     env_file:
       - production.env
     volumes:
