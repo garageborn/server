@@ -37,7 +37,7 @@ sudo bash -c "echo 'overcommit_memory=1' >> /etc/sysctl.conf"
 sudo /bin/dd if=/dev/zero of=/mnt/swap bs=1M count=4096
 sudo chown root:root /mnt/swap
 sudo chmod 600 /mnt/swap
-sudo /sbin/mkswap /mnt/swap
+sudo /sbin/mkswap -f /mnt/swap
 sudo /sbin/swapon /mnt/swap
 sudo bash -c "echo '/mnt/swap swap swap defaults 0 0' >> /etc/fstab"
 ```

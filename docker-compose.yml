@@ -7,6 +7,7 @@ services:
       - '6379:6379'
     volumes:
       - /srv/docker/redis:/data
+    restart: on_failure
 
   elasticsearch:
     image: elasticsearch:2.3.5
@@ -14,6 +15,7 @@ services:
       - '9200:9200'
     volumes:
       - /srv/docker/elasticsearch:/usr/share/elasticsearch/data
+    restart: on_failure
 
   api:
     image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-api:latest
@@ -27,6 +29,7 @@ services:
       - production.env
     volumes:
       - /srv/docker/api/public/assets:/mttrs-api/public/assets
+    restart: on_failure
 
   frontend:
     image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-frontend:latest
@@ -39,6 +42,7 @@ services:
       - production.env
     volumes:
       - /srv/docker/frontend/web/public/static:/mttrs-frontend/web/public/static
+    restart: on_failure
 
   worker:
     image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-api:latest
@@ -49,6 +53,7 @@ services:
       - proxy:proxy.server
     env_file:
       - production.env
+    restart: on_failure
 
   web:
     build: docker/images/web
@@ -63,6 +68,7 @@ services:
       - /srv/docker/api/public/assets:/mttrs-api/public/assets
       - /srv/docker/frontend/web/public/static:/mttrs-frontend/web/public/static
       - /srv/docker/gb/build:/gb/build
+    restart: on_failure
 
   proxy:
     image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/proxy:latest
@@ -73,6 +79,7 @@ services:
       - redis:redis.server
     env_file:
       - production.env
+    restart: on_failure
 
   gb:
     image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/gb:latest
@@ -83,3 +90,4 @@ services:
       - /srv/docker/gb/build:/gb/build
     env_file:
       - production.env
+    restart: on_failure
