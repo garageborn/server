@@ -1,6 +1,6 @@
-# Create Docker Machine
+# Server
 
-### Setup
+### Local Setup
 
 ```
 brew install docker docker-compose docker-machine direnv
@@ -8,6 +8,7 @@ echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
 direnv allow
 ```
 
+### Host Setup
 
 ```
 docker-machine -D create  \
@@ -21,6 +22,27 @@ docker-machine -D create  \
   --amazonec2-zone d \
   app.production
 ```
+
+```
+# Disable Transparent Huge Pages (THP)
+https://docs.mongodb.com/manual/tutorial/transparent-huge-pages/
+
+# Increase TCP backlog
+sudo bash -c "echo 'net.core.somaxconn=1024' >> /etc/sysctl.conf"
+
+# Enable overcommit
+sudo bash -c "echo 'overcommit_memory=1' >> /etc/sysctl.conf"
+
+# Swap
+sudo /bin/dd if=/dev/zero of=/mnt/swap bs=1M count=4096
+sudo chown root:root /mnt/swap
+sudo chmod 600 /mnt/swap
+sudo /sbin/mkswap /mnt/swap
+sudo /sbin/swapon /mnt/swap
+sudo bash -c "echo '/mnt/swap swap swap defaults 0 0' >> /etc/fstab"
+```
+
+### Use it
 
 ```
 docker-machine --storage-path docker/machine ls
