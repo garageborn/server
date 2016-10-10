@@ -19,6 +19,7 @@ docker-machine -D create  \
   --amazonec2-root-size 50 \
   --amazonec2-subnet-id subnet-16fda04e \
   --amazonec2-vpc-id vpc-3a41f55d \
+  --amazonec2-ami ami-e3c3b8f4 \
   --amazonec2-zone d \
   app.production
 ```
