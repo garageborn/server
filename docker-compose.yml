@@ -9,21 +9,12 @@ services:
       - /srv/docker/redis:/data
     restart: on_failure
 
-  elasticsearch:
-    image: elasticsearch:2.3.5
-    ports:
-      - '9200:9200'
-    volumes:
-      - /srv/docker/elasticsearch:/usr/share/elasticsearch/data
-    restart: on_failure
-
   api:
     image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-api:latest
     command: bash -c "bin/rails assets:precompile && bundle exec puma -C config/puma.rb"
     ports:
       - '3000:3000'
     links:
-      - elasticsearch:elasticsearch.server
       - redis:redis.server
     env_file:
       - production.env
@@ -48,7 +39,6 @@ services:
     image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-api:latest
     command: bash -c "printenv | sed 's/^\(.*\)/export \1/g' >> ~/.bashrc && bundle exec whenever -f config/schedule/production.rb --update-crontab && service cron start && bundle exec sidekiq"
     links:
-      - elasticsearch:elasticsearch.server
       - redis:redis.server
       - proxy:proxy.server
     env_file:
