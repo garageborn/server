@@ -6,9 +6,14 @@ namespace :deploy do
 
   desc 'Publish application'
   task :publish do
-    system "#{ compose_command } pull"
-    system "#{ compose_command } build"
-    system "#{ compose_command } up -d --remove-orphans"
+    system "#{ docker_compose } pull"
+    system "#{ docker_compose } build"
+    system "#{ docker_compose } up -d --remove-orphans"
+  end
+
+  desc 'Cleanup unused images'
+  task :cleanup do
+    system "#{ docker } rmi $(#{ docker } images --filter 'dangling=true' -q --no-trunc)"
   end
 
   task :run do
@@ -22,11 +27,18 @@ task :deploy do
   Rake::Task['deploy:run'].invoke
 end
 
-def compose_command
+def docker
+  "docker #{ docker_params }"
+end
+
+def docker_compose
+  "docker-compose #{ docker_params }"
+end
+
+def docker_params
   env = `docker-machine --storage-path docker/machine env app.production`
   host = env.scan(/tcp:\/\/.*\:2376/).first
   command = <<-CMD
-    docker-compose \
       --tlsverify \
       --tlscacert docker/machine/machines/app.production/ca.pem \
       --tlscert docker/machine/machines/app.production/cert.pem \
