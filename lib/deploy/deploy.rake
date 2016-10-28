@@ -1,4 +1,4 @@
-require 'active_support'
+require 'active_support/all'
 
 namespace :deploy do
   desc 'Load aws login'
