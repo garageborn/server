@@ -13,7 +13,8 @@ namespace :deploy do
 
   desc 'Cleanup unused images'
   task :cleanup do
-    system "#{ docker } rmi $(#{ docker } images --filter 'dangling=true' -q --no-trunc)"
+    images = `#{ docker } images --filter 'dangling=true' -q --no-trunc`
+    system "#{ docker } rmi #{ images }" if images.present?
   end
 
   task :run do
