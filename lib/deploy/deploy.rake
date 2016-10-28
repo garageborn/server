@@ -19,6 +19,7 @@ namespace :deploy do
   task :run do
     Rake::Task['deploy:setup'].invoke
     Rake::Task['deploy:publish'].invoke
+    Rake::Task['deploy:cleanup'].invoke
   end
 end
 
