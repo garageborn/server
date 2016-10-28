@@ -1,3 +1,5 @@
+require 'active_support'
+
 namespace :deploy do
   desc 'Load aws login'
   task :setup do
