@@ -52,7 +52,7 @@ namespace :letsencrypt do
 
     desc 'Commit certs'
     task :commit do |_t, domain|
-      # system "git commit -a -m'#{ domain } certs created'"
+      system "git commit -a -m'#{ domain } certs created'"
     end
   end
 end
