@@ -9,24 +9,23 @@ namespace :letsencrypt do
   desc 'Renew all certs'
   task :renew do
     DOMAINS.each do |domain|
-      Rake::Task["letsencrypt:generate:run[#{ domain }]"].invoke
+      Rake::Task['letsencrypt:generate:run'].invoke(domain)
     end
   end
 
   namespace :generate do
     task :run, [:domain] do |_t, args|
       domain = args[:domain]
-        Rake::Task["letsencrypt:generate:create[#{ domain }]"].invoke
-        Rake::Task["letsencrypt:generate:download[#{ domain }]"].invoke
-        Rake::Task["letsencrypt:generate:commit[#{ domain }]"].invoke
+      Rake::Task['letsencrypt:generate:create'].invoke(domain)
+      Rake::Task['letsencrypt:generate:download'].invoke(domain)
+      Rake::Task['letsencrypt:generate:commit'].invoke(domain)
     end
 
     desc 'Create cert'
     task :create, [:domain] do |_t, args|
       domain = args[:domain]
-      system <<-CMD
-        mkdir -p /tmp/letsencrypt/www.garageborn.com &&
-        certbot certonly \
+      command = <<-CMD
+        /usr/bin/certbot certonly \
           --text \
           --non-interactive \
           --agree-tos \
@@ -35,6 +34,8 @@ namespace :letsencrypt do
           -w /tmp/letsencrypt/#{ domain } \
           -d #{ domain }
       CMD
+      system "docker exec -ti server_web_1 mkdir -p /tmp/letsencrypt/#{ domain }"
+      system "docker exec -ti server_web_1 #{ command }"
     end
 
     desc 'Download created certs'
@@ -51,7 +52,7 @@ namespace :letsencrypt do
     end
 
     desc 'Commit certs'
-    task :commit, [:domain] do
+    task :commit, [:domain] do |_t, args|
       domain = args[:domain]
       system "git commit -a -m'#{ domain } certs created'"
     end
