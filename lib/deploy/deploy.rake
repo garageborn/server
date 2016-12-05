@@ -20,15 +20,15 @@ namespace :deploy do
   end
 
   task :run do
-    Rake::Task['deploy:setup'].invoke
-    Rake::Task['deploy:publish'].invoke
-    Rake::Task['deploy:cleanup'].invoke
+    Rake::Task['deploy:setup'].execute
+    Rake::Task['deploy:publish'].execute
+    Rake::Task['deploy:cleanup'].execute
   end
 end
 
 desc 'Deploy'
 task :deploy do
-  Rake::Task['deploy:run'].invoke
+  Rake::Task['deploy:run'].execute
 end
 
 def docker

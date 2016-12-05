@@ -1,7 +1,7 @@
 namespace :letsencrypt do
   DOMAINS = %w(
-    alpha.mtt.rs
     alpha.br.mtt.rs
+    alpha.mtt.rs
     api.mtt.rs
     www.garageborn.com
   ).freeze
@@ -9,21 +9,19 @@ namespace :letsencrypt do
   desc 'Renew all certs'
   task :renew do
     DOMAINS.each do |domain|
-      Rake::Task['letsencrypt:generate:run'].invoke(domain)
+      Rake::Task['letsencrypt:generate:run'].execute(domain)
     end
   end
 
   namespace :generate do
-    task :run, [:domain] do |_t, args|
-      domain = args[:domain]
-      Rake::Task['letsencrypt:generate:create'].invoke(domain)
-      Rake::Task['letsencrypt:generate:download'].invoke(domain)
-      Rake::Task['letsencrypt:generate:commit'].invoke(domain)
+    task :run do |_t, domain|
+      Rake::Task['letsencrypt:generate:create'].execute(domain)
+      Rake::Task['letsencrypt:generate:download'].execute(domain)
+      Rake::Task['letsencrypt:generate:commit'].execute(domain)
     end
 
     desc 'Create cert'
-    task :create, [:domain] do |_t, args|
-      domain = args[:domain]
+    task :create do |_t, domain|
       command = <<-CMD
         /usr/bin/certbot certonly \
           --text \
@@ -39,22 +37,22 @@ namespace :letsencrypt do
     end
 
     desc 'Download created certs'
-    task :download, [:domain] do |_t, args|
-      domain = args[:domain]
-      files = `docker exec -t server_web_1 ls /etc/letsencrypt/live/#{ domain }`.chomp.split
+    task :download do |_t, domain|
+      origin = "/etc/letsencrypt/live/#{ domain }"
+      destination = File.expand_path("../../../docker/images/web/nginx/ssl/#{ domain }", __FILE__)
+      system "mkdir -p #{ destination }"
+
+      files = `docker exec -t server_web_1 ls #{ origin }`.chomp.split
       files.each do |file|
         system <<-CMD
-          docker cp --follow-link \
-            server_web_1:/etc/letsencrypt/live/#{ domain }/#{ file } \
-            docker/images/web/nginx/ssl/#{ domain }
+          docker cp --follow-link server_web_1:#{ origin }/#{ file } #{ destination }
         CMD
       end
     end
 
     desc 'Commit certs'
-    task :commit, [:domain] do |_t, args|
-      domain = args[:domain]
-      system "git commit -a -m'#{ domain } certs created'"
+    task :commit do |_t, domain|
+      # system "git commit -a -m'#{ domain } certs created'"
     end
   end
 end
