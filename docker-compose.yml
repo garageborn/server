@@ -24,7 +24,7 @@ services:
 
   mttrs-web:
     image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-web:latest
-    command: bash -c "npm run build-web && node build/server/server.js"
+    command: bash -c "npm run build && node build/server/server.js"
     ports:
       - '4001:4001'
     links:
