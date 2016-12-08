@@ -9,7 +9,7 @@ services:
       - /srv/docker/redis:/data
     restart: on_failure
 
-  api:
+  mttrs-api:
     image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-api:latest
     command: bash -c "bin/rails assets:precompile && bundle exec puma -C config/puma.rb"
     ports:
@@ -19,20 +19,20 @@ services:
     env_file:
       - production.env
     volumes:
-      - /srv/docker/api/public/assets:/mttrs-api/public/assets
+      - /srv/docker/mttrs-api/public/assets:/mttrs-api/public/assets
     restart: on_failure
 
-  frontend:
-    image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-frontend:latest
-    command: bash -c "npm run build-web && node build/web/server/server.js"
+  mttrs-web:
+    image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-web:latest
+    command: bash -c "npm run build-web && node build/server/server.js"
     ports:
       - '4001:4001'
     links:
-      - api:api.server
+      - mttrs-api:mttrs-api.server
     env_file:
       - production.env
     volumes:
-      - /srv/docker/frontend/web/public/static:/mttrs-frontend/web/public/static
+      - /srv/docker/mttrs-web/public/static:/mttrs-web/public/static
     restart: on_failure
 
   worker:
@@ -51,13 +51,13 @@ services:
       - '80:80'
       - '443:443'
     links:
-      - api:api.server
-      - frontend:frontend.server
+      - mttrs-api:mttrs-api.server
+      - mttrs-web:mttrs-web.server
       - proxy:proxy.server
       - gb:gb.server
     volumes:
-      - /srv/docker/api/public/assets:/mttrs-api/public/assets
-      - /srv/docker/frontend/web/public/static:/mttrs-frontend/web/public/static
+      - /srv/docker/mttrs-api/public/assets:/mttrs-api/public/assets
+      - /srv/docker/mttrs-web/public/static:/mttrs-web/public/static
       - /srv/docker/gb/build:/gb/build
     restart: on_failure
 
