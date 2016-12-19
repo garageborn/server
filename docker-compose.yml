@@ -24,15 +24,15 @@ services:
 
   mttrs-web:
     image: 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-web:latest
-    command: bash -c "npm run build && node build/server/server.js"
+    command: bash -c "npm run production"
     ports:
-      - '4001:4001'
+      - '4000:4000'
     links:
       - mttrs-api:mttrs-api.server
     env_file:
       - production.env
     volumes:
-      - /srv/docker/mttrs-web/public/static:/mttrs-web/public/static
+      - /srv/docker/mttrs-web/build:/mttrs-web/build
     restart: on_failure
 
   worker:
