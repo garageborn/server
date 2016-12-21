@@ -58,8 +58,6 @@ COPY nginx /etc/nginx
 WORKDIR /etc/nginx/includes/geoip
 RUN wget http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz && \
   gunzip GeoLite2-City.mmdb.gz
-RUN wget http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.mmdb.gz && \
-  gunzip GeoLite2-Country.mmdb.gz
 
 WORKDIR /etc/nginx
 CMD 'nginx'
