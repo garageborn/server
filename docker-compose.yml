@@ -57,7 +57,7 @@ services:
       - gb:gb.server
     volumes:
       - /srv/docker/mttrs-api/public/assets:/mttrs-api/public/assets
-      - /srv/docker/mttrs-web/build:/mttrs-web/
+      - /srv/docker/mttrs-web/build:/mttrs-web/build
       - /srv/docker/gb/build:/gb/build
     restart: on_failure
 
