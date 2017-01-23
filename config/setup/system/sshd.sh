@@ -54,6 +54,7 @@ ChallengeResponseAuthentication no
 PasswordAuthentication no
 
 X11Forwarding yes
+AllowTcpForwarding yes
 X11DisplayOffset 10
 PrintMotd no
 PrintLastLog yes
