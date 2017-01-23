@@ -7,6 +7,7 @@ namespace :setup do
       invoke 'setup:tools:ruby'
       invoke 'setup:tools:node'
       invoke 'setup:tools:nginx'
+      invoke 'setup:tools:postgresql'
     end
 
     desc 'Install node'
@@ -27,6 +28,13 @@ namespace :setup do
     task :nginx do
       on roles(:all) do
         run_script('tools/nginx.sh')
+      end
+    end
+
+    desc 'Install postgresql'
+    task :postgresql do
+      on roles(:all) do
+        run_script('tools/postgresql.sh')
       end
     end
   end

@@ -13,4 +13,5 @@ alias l="ls $LS_OPTIONS -lA"
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US:en
 export LC_ALL=en_US.UTF-8
+if [ -f /etc/profile.d/garageborn.sh ]; then . /etc/profile.d/garageborn.sh; fi
 EOL
