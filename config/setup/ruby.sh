@@ -3,10 +3,11 @@ echo "# ruby"
 
 git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
 git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+cd ~/.rbenv && sudo src/configure && sudo make -C src
 
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-echo 'gem: --no-rdoc --no-ri' >> ~/.gemrc
+echo 'gem: --no-rdoc --no-ri' > ~/.gemrc
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"

@@ -49,7 +49,7 @@ namespace :setup do
   desc 'Setup hostname'
   task :hostname do
     on roles(:all) do |host|
-      hostname = host.hostname.gsub('.server.garageborn.com', '').strip
+      hostname = host.hostname.gsub('.garageborn.com', '').strip
       run_script('hostname.sh', args: hostname)
     end
   end
@@ -58,6 +58,15 @@ namespace :setup do
   task :locale do
     on roles(:all) do
       run_script('locale.sh')
+    end
+  end
+
+  desc 'Reboot'
+  task :reboot do
+    on roles(:all) do
+      execute(:sudo, :reboot) rescue nil
+      puts 'Sleeping for 5 minutes (waiting for reboot)'
+      sleep 300
     end
   end
 
@@ -106,7 +115,7 @@ namespace :setup do
     # invoke 'setup:user_ssh'
     # invoke 'setup:sshd'
     # invoke 'setup:remove_default_user'
-    invoke 'setup:bashrc'
+    # invoke 'setup:bashrc'
     #
     # invoke 'setup:apt'
     # invoke 'setup:ruby'
@@ -115,11 +124,9 @@ namespace :setup do
     # invoke 'setup:locale'
     # invoke 'setup:timezone'
     #
-    # execute(:sudo, :reboot) rescue nil
-    # puts 'Sleeping for 5 minutes (waiting for reboot)'
-    # sleep 300
-    #
-    # invoke 'deploy'
+    invoke 'setup:reboot'
+
+    invoke 'deploy'
   end
 
   before 'setup:run', 'setup:ask_root_keys'

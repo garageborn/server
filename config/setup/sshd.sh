@@ -4,6 +4,7 @@ echo "# sshd"
 sudo cat >/etc/ssh/sshd_config <<EOL
 Port 41858
 Protocol 2
+
 # HostKeys for protocol version 2
 HostKey /etc/ssh/ssh_host_rsa_key
 HostKey /etc/ssh/ssh_host_dsa_key
@@ -11,6 +12,10 @@ HostKey /etc/ssh/ssh_host_ecdsa_key
 HostKey /etc/ssh/ssh_host_ed25519_key
 # Privilege Separation is turned on for security
 UsePrivilegeSeparation yes
+
+# Avoid timeout
+ClientAliveInterval 120
+ClientAliveCountMax 720
 
 # Lifetime and size of ephemeral version 1 server key
 KeyRegenerationInterval 3600
