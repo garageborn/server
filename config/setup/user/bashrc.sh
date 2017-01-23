@@ -9,6 +9,10 @@ alias ls="ls $LS_OPTIONS"
 alias ll="ls $LS_OPTIONS -l"
 alias l="ls $LS_OPTIONS -lA"
 
+# rbenv
+export PATH="\$HOME/.rbenv/bin:\$PATH"
+eval "\$(rbenv init -)"
+
 # ENV
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US:en
