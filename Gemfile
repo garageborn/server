@@ -1,4 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rake', '11.3.0'
-gem 'activesupport', '5.0.0.1'
+gem 'activesupport', '5.0.1'
+gem 'capistrano-bundler', '1.2.0', require: false
+gem 'capistrano-rbenv', '2.1.0', require: false
+gem 'capistrano', '3.7.1'
+gem 'rake', '12.0.0'
