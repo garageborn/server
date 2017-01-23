@@ -6,6 +6,7 @@ namespace :setup do
     task :run do
       invoke 'setup:tools:ruby'
       invoke 'setup:tools:node'
+      invoke 'setup:tools:nginx'
     end
 
     desc 'Install node'
@@ -19,6 +20,13 @@ namespace :setup do
     task :ruby do
       on roles(:all) do
         run_script('tools/ruby.sh')
+      end
+    end
+
+    desc 'Install nginx'
+    task :nginx do
+      on roles(:all) do
+        run_script('tools/nginx.sh')
       end
     end
   end

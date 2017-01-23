@@ -20,6 +20,7 @@ packages=(
   curl
   git-core
   htop
+  screen
   vim
   wget
 )

@@ -1,6 +1,8 @@
 #!/bin/bash
 echo "# nginx"
 
+NGINX_VERSION=1.10.2
+
 packages=(
   # geoip
   libmaxminddb-dev
@@ -16,8 +18,8 @@ wget http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz && \
   tar -zxf nginx-$NGINX_VERSION.tar.gz && \
   git clone https://github.com/leev/ngx_http_geoip2_module.git
 
-cd /nginx-$NGINX_VERSION
-./configure \
+cd nginx-$NGINX_VERSION
+sudo ./configure \
     --prefix=/etc/nginx \
     --sbin-path=/usr/sbin/nginx \
     --conf-path=/etc/nginx/nginx.conf \
@@ -36,12 +38,13 @@ cd /nginx-$NGINX_VERSION
     --with-file-aio \
     --with-http_v2_module \
     --with-ipv6 \
-    --add-module=/ngx_http_geoip2_module && \
-    make && \
-    make install
-rm -rf /nginx-$NGINX_VERSION /ngx_http_geoip2_module
+    --add-module=../ngx_http_geoip2_module && \
+    sudo make && \
+    sudo make install
+rm -rf ../nginx-$NGINX_VERSION ../ngx_http_geoip2_module
 
 # setup geo
-cd /etc/geoip && \
-  wget http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz && \
-  gunzip GeoLite2-City.mmdb.gz
+sudo mkdir -p /etc/geoip && \
+  cd /etc/geoip && \
+  sudo wget http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz && \
+  sudo gunzip -f GeoLite2-City.mmdb.gz

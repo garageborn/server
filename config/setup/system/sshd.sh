@@ -14,8 +14,8 @@ HostKey /etc/ssh/ssh_host_ed25519_key
 UsePrivilegeSeparation yes
 
 # Avoid timeout
-ClientAliveInterval 120
-ClientAliveCountMax 720
+ClientAliveInterval 300
+ClientAliveCountMax 1000
 
 # Lifetime and size of ephemeral version 1 server key
 KeyRegenerationInterval 3600
