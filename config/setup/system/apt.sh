@@ -17,6 +17,7 @@ packages=(
   zlib1g-dev
 
   # system tools
+  cron
   curl
   git-core
   htop
