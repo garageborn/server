@@ -13,6 +13,10 @@ alias l="ls $LS_OPTIONS -lA"
 export PATH="\$HOME/.rbenv/bin:\$PATH"
 eval "\$(rbenv init -)"
 
+# node
+export PATH="\$HOME/.yarn/bin:\$PATH"
+export PATH="\$HOME/.config/yarn/global/node_modules/.bin:\$PATH"
+
 # ENV
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US:en

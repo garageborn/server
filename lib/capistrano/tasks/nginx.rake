@@ -10,7 +10,9 @@ namespace :nginx do
     desc 'Install Nginx config files from `config/nginx`'
     task :config do
       on roles(:all) do
+        execute(:sudo, 'rm -rf /etc/nginx.bkp')
         execute(:sudo, 'mv -f /etc/nginx /etc/nginx.bkp 2>/dev/null') rescue nil
+        execute(:sudo, 'rm -rf /etc/nginx')
         execute(:sudo, "cp -a #{ fetch(:release_path) }/config/nginx /etc/nginx")
       end
     end

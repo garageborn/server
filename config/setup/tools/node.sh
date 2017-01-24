@@ -2,8 +2,11 @@
 echo "# node"
 
 curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt-get update && sudo apt-get install -y nodejs
 
-sudo apt-get update
-sudo apt-get install -y nodejs yarn
+# yarn
+curl -o- -L https://yarnpkg.com/install.sh | bash
+export PATH="$HOME/.yarn/bin:$PATH"
+export PATH="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+yarn global add pm2 --prefix=~/.config/yarn/global/node_modules/.bin

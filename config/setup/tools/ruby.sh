@@ -5,6 +5,7 @@ packages=(
   autoconf
   bison
   build-essential
+  cmake
   libcurl4-openssl-dev
   libffi-dev
   libgdbm-dev
@@ -14,6 +15,7 @@ packages=(
   libreadline6-dev
   libssl-dev
   libyaml-dev
+  pkg-config
   zlib1g-dev
 )
 sudo apt-get update && sudo apt-get install -y ${packages[@]}
@@ -31,3 +33,4 @@ rbenv install 2.4.0 --skip-existing
 rbenv global 2.4.0
 rbenv shell 2.4.0
 gem install bundler
+gem update --system
