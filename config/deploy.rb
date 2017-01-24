@@ -6,14 +6,8 @@ set :keep_releases, 10
 set :deploy_to, '/home/garageborn/server'
 set :pty, true
 set :root, File.expand_path(File.dirname(__FILE__) + '/../')
-set :ssh_options, {
-  forward_agent: true,
-  port: 41858
-}
-
-set :branch, -> {
-  ENV['branch'] || ask(:branch, `git rev-parse --abbrev-ref HEAD`.chomp)
-}
+set :ssh_options, { forward_agent: true, port: 41858 }
+set :branch, -> { ENV['branch'] || `git rev-parse --abbrev-ref HEAD`.chomp }
 set :use_sudo, false
 
 # rbenv
