@@ -34,8 +34,8 @@ namespace :setup do
 
   desc 'Setup a new server'
   task :run do
-    # invoke 'setup:system:run'
-    # invoke 'setup:user:run'
+    invoke 'setup:system:run'
+    invoke 'setup:user:run'
 
     invoke 'setup:sshd'
     invoke 'setup:remove_default_user'
