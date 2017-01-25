@@ -44,6 +44,8 @@ namespace :setup do
     invoke 'setup:reboot'
 
     invoke 'deploy'
+
+    puts 'Please add env variables on /etc/profile.f/garageborn.sh'
   end
 
   before 'setup:run', 'setup:ask_root_keys'
