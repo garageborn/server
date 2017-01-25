@@ -17,10 +17,8 @@ set :rbenv_prefix, "RBENV_ROOT=#{ fetch(:rbenv_path) } RBENV_VERSION=#{ fetch(:r
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all
 
-# whenever
-# set :whenever_identifier, -> { fetch(:application) }
-# set :whenever_roles, -> { :worker }
-# set :whenever_config, -> { "#{ release_path }/config/schedule/schedule.rb" }
-# set :whenever_command, -> {
-#   [:bundle, :exec, :whenever, "--load-file #{ fetch(:whenever_config) }"]
-# }
+# slackistrano
+set :slackistrano, {
+  channel: '#activities',
+  webhook: 'https://hooks.slack.com/services/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'
+}
