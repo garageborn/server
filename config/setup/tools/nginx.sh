@@ -41,7 +41,7 @@ sudo ./configure \
     --add-module=../ngx_http_geoip2_module && \
     sudo make && \
     sudo make install
-rm -rf ../nginx-$NGINX_VERSION ../ngx_http_geoip2_module
+sudo rm -rf ../nginx-$NGINX_VERSION ../ngx_http_geoip2_module
 
 # setup geo
 sudo mkdir -p /etc/geoip && \

@@ -11,8 +11,8 @@ namespace :setup do
   task :reboot do
     on roles(:all) do
       execute(:sudo, :reboot) rescue nil
-      puts 'Sleeping for 5 minutes (waiting for reboot)'
-      sleep 300
+      puts 'Sleeping for 3 minutes (waiting for reboot)'
+      sleep 180
     end
   end
 
@@ -25,11 +25,21 @@ namespace :setup do
     end
   end
 
+  desc 'Remove default user'
+  task :remove_default_user do
+    on roles(:all) do
+      run_script('remove_default_user.sh')
+    end
+  end
+
   desc 'Setup a new server'
   task :run do
     invoke 'setup:system:run'
     invoke 'setup:user:run'
+
     invoke 'setup:sshd'
+    invoke 'setup:remove_default_user'
+
     invoke 'setup:tools:run'
     invoke 'setup:reboot'
 

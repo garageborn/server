@@ -14,7 +14,7 @@ namespace :setup do
     task :apt do
       on roles(:all) do
         with_default_user(host) do
-          run_script('apt.sh')
+          run_script('system/apt.sh')
         end
       end
     end
@@ -24,7 +24,7 @@ namespace :setup do
       on roles(:all) do |host|
         with_default_user(host) do
           hostname = host.hostname.gsub('.garageborn.com', '').strip
-          run_script('hostname.sh', args: hostname)
+          run_script('system/hostname.sh', args: hostname)
         end
       end
     end
@@ -33,7 +33,7 @@ namespace :setup do
     task :locale do
       on roles(:all) do |host|
         with_default_user(host) do
-          run_script('locale.sh')
+          run_script('system/locale.sh')
         end
       end
     end
@@ -42,7 +42,7 @@ namespace :setup do
     task :timezone do
       on roles(:all) do
         with_default_user(host) do
-          run_script('timezone.sh')
+          run_script('system/timezone.sh')
         end
       end
     end

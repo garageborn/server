@@ -27,3 +27,4 @@ packages=(
 )
 
 sudo apt-get install -y ${packages[@]}
+sudo apt-get autoremove && sudo apt-get autoclean

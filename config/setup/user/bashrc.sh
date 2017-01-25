@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "# .bashrc"
 
-cat >~/.bashrc <<EOL
+cat >/home/garageborn/.bashrc <<EOL
 export PS1="\[\\033]0;\h\\007\]\u@\h [\w]#"
 export EDITOR="vim"
 export LS_OPTIONS="--color=auto"
@@ -23,3 +23,5 @@ export LANGUAGE=en_US:en
 export LC_ALL=en_US.UTF-8
 if [ -f /etc/profile.d/garageborn.sh ]; then . /etc/profile.d/garageborn.sh; fi
 EOL
+
+sudo chown -Rf garageborn:garageborn /home/garageborn
