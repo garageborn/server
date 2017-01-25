@@ -13,7 +13,9 @@ namespace :setup do
     desc 'set bashrc variables'
     task :bashrc do
       on roles(:all) do
-        run_script('user/bashrc.sh')
+        with_default_user(host) do
+          run_script('user/bashrc.sh')
+        end
       end
     end
 
@@ -21,7 +23,7 @@ namespace :setup do
     task :create_user do
       on roles(:all) do |host|
         with_default_user(host) do
-          run_script('user/create_user.sh', use_sudo: true)
+          run_script('user/create_user.sh')
         end
       end
     end
@@ -30,7 +32,7 @@ namespace :setup do
     task :ssh_keys do
       on roles(:all) do |host|
         with_default_user(host) do
-          run_script('user/ssh_keys.sh', use_sudo: true)
+          run_script('user/ssh_keys.sh')
         end
       end
     end

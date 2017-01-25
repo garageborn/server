@@ -1,14 +1,13 @@
-def run_script(script, use_sudo: false, args: nil)
-  sudo = 'sudo' if use_sudo
+def run_script(script, args: nil)
   filename = script.split('/').last
   basepath = '/tmp/setup'
 
   execute("sudo mkdir -p #{ basepath }")
-  execute("sudo mkdir -p chown `whoami`:`whoami` #{ basepath }")
+  execute("sudo chown -R `whoami`:`whoami` #{ basepath }")
 
   upload!("#{ fetch(:root) }/config/setup/#{ script }", basepath)
-  execute("#{ sudo } chmod +x #{ basepath }/#{ filename }")
-  execute("cd #{ basepath } && #{ sudo } ./#{ filename } #{ args }")
+  execute("chmod +x #{ basepath }/#{ filename }")
+  execute("cd #{ basepath } && ./#{ filename } #{ args }")
 end
 
 def with_default_user(host, &block)

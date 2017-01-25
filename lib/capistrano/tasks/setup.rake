@@ -20,7 +20,7 @@ namespace :setup do
   task :sshd do
     on roles(:all) do |host|
       with_default_user(host) do
-        run_script('sshd.sh', use_sudo: true)
+        run_script('sshd.sh')
       end
     end
   end
@@ -34,8 +34,8 @@ namespace :setup do
 
   desc 'Setup a new server'
   task :run do
-    invoke 'setup:system:run'
-    invoke 'setup:user:run'
+    # invoke 'setup:system:run'
+    # invoke 'setup:user:run'
 
     invoke 'setup:sshd'
     invoke 'setup:remove_default_user'

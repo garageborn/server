@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "# sshd"
 
-sudo cat >/etc/ssh/sshd_config <<EOL
+config=$(cat <<EOL
 Port 41858
 Protocol 2
 
@@ -66,6 +66,7 @@ AcceptEnv LANG LC_*
 Subsystem sftp /usr/lib/openssh/sftp-server
 
 UsePAM yes
-EOL
+EOL)
 
+sudo sh -c "echo \"$config\" > /etc/ssh/sshd_config"
 sudo /etc/init.d/ssh restart
