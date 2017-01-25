@@ -5,7 +5,7 @@ namespace :setup do
     desc 'Setup user'
     task :run do
       invoke 'setup:create_user'
-      invoke 'setup:user_ssh'
+      invoke 'setup:ssh_keys'
       invoke 'setup:bashrc'
       invoke 'setup:remove_default_user'
     end
@@ -27,10 +27,10 @@ namespace :setup do
     end
 
     desc 'add SSH keys to `~/.ssh/authorized_keys`'
-    task :user_ssh do
+    task :ssh_keys do
       on roles(:all) do |host|
         with_default_user(host) do
-          run_script('user/user_ssh.sh', use_sudo: true)
+          run_script('user/ssh_keys.sh', use_sudo: true)
         end
       end
     end
