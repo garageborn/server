@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    CFPropertyList (2.3.4)
+    CFPropertyList (2.3.5)
     activesupport (5.0.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (~> 0.7)
@@ -10,7 +10,7 @@ GEM
     airbrussh (1.1.2)
       sshkit (>= 1.6.1, != 1.7.0)
     builder (3.2.3)
-    capistrano (3.7.1)
+    capistrano (3.7.2)
       airbrussh (>= 1.0.0)
       capistrano-harrow
       i18n
@@ -153,7 +153,7 @@ GEM
       fog-core
       nokogiri (~> 1.5, >= 1.5.11)
     formatador (0.2.5)
-    i18n (0.7.0)
+    i18n (0.8.0)
     inflecto (0.0.2)
     ipaddress (0.8.3)
     json (2.0.3)
@@ -190,7 +190,7 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport (= 5.0.1)
-  capistrano (= 3.7.1)
+  capistrano (= 3.7.2)
   capistrano-bundler (= 1.2.0)
   capistrano-rbenv (= 2.1.0)
   fog (= 1.38.0)
