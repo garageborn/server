@@ -1,0 +1,9 @@
+/home/garageborn/mttrs-web/shared/log/*.log {
+  daily
+  missingok
+  rotate 10
+  compress
+  delaycompress
+  notifempty
+  copytruncate
+}
