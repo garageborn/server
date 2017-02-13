@@ -1,4 +1,5 @@
 /home/garageborn/mttrs-web/shared/log/*.log {
+  su garageborn garageborn
   daily
   missingok
   rotate 10

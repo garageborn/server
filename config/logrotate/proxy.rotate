@@ -1,4 +1,5 @@
 /home/garageborn/proxy/shared/log/*.log {
+  su garageborn garageborn
   daily
   missingok
   rotate 10
