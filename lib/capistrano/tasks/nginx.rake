@@ -9,7 +9,7 @@ namespace :nginx do
 
     desc 'Install Nginx config files from `config/nginx`'
     task :config do
-      on roles(:all) do
+      on roles(:app) do
         execute(:sudo, 'rm -rf /etc/nginx.bkp')
         execute(:sudo, 'mv -f /etc/nginx /etc/nginx.bkp 2>/dev/null') rescue nil
         execute(:sudo, 'rm -rf /etc/nginx')
@@ -19,7 +19,7 @@ namespace :nginx do
 
     desc 'Allow `garageborn` user to write Nginx logs'
     task :set_permissions do
-      on roles(:all) do
+      on roles(:app) do
         execute :sudo, :mkdir, '-p', '/var/log/nginx/'
         execute :sudo, :chown, '-Rf', 'garageborn:garageborn', '/var/log/nginx/'
       end
@@ -28,14 +28,14 @@ namespace :nginx do
 
   desc 'Stop Nginx'
   task :stop do
-    on roles(:all) do
+    on roles(:app) do
       execute(:sudo, 'nginx -s stop') rescue nil
     end
   end
 
   desc 'Start Nginx'
   task :start do
-    on roles(:all) do
+    on roles(:app) do
       execute(:sudo, 'nginx')
     end
   end

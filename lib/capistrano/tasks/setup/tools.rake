@@ -26,7 +26,7 @@ namespace :setup do
 
     desc 'Install nginx'
     task :nginx do
-      on roles(:all) do
+      on roles(:app) do
         run_script('tools/nginx.sh')
       end
     end
