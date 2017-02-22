@@ -33,7 +33,7 @@ namespace :letsencrypt do
     desc 'Create cert'
     task :create, :domain do |_t, args|
       domain = args[:domain]
-      on roles(:ssl), in: :sequence do
+      on roles(:ssl) do
         execute <<-CMD
           mkdir -p /tmp/letsencrypt/#{ domain }
           sudo chown -R garageborn:garageborn /var/log/letsencrypt /etc/letsencrypt/
