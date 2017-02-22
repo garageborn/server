@@ -1,10 +1,14 @@
 namespace :letsencrypt do
+  # DOMAINS = %w(
+  #   mtt.rs
+  #   mttrs.com.br
+  #   api.mtt.rs
+  #   api.origin.mtt.rs
+  #   www.garageborn.com
+  # ).freeze
+
   DOMAINS = %w(
     mtt.rs
-    mttrs.com.br
-    api.mtt.rs
-    api.origin.mtt.rs
-    www.garageborn.com
   ).freeze
 
   desc 'Renew all certs'
@@ -25,18 +29,21 @@ namespace :letsencrypt do
     desc 'Create cert'
     task :create, :domain do |_t, args|
       domain = args[:domain]
-      execute "mkdir -p /tmp/letsencrypt/#{ domain }"
-      execute <<-CMD
-        /usr/bin/certbot certonly \
-          --text \
-          --non-interactive \
-          --agree-tos \
-          --email apps@garageborn.com \
-          --webroot \
-          -w /tmp/letsencrypt/#{ domain } \
-          -d #{ domain }
-      CMD
-      execute 'sudo chown garageborn:garageborn -R /etc/letsencrypt/'
+      on roles(:ssl) do
+        execute <<-CMD
+          mkdir -p /tmp/letsencrypt/#{ domain }
+          sudo chown -R garageborn:garageborn /var/log/letsencrypt
+          letsencrypt certonly \
+            --text \
+            --non-interactive \
+            --agree-tos \
+            --email apps@garageborn.com \
+            --webroot \
+            -w /tmp/letsencrypt/#{ domain } \
+            -d #{ domain }
+          sudo chown garageborn:garageborn -R /etc/letsencrypt/
+        CMD
+      end
     end
 
     desc 'Download created certs'
