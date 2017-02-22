@@ -8,7 +8,7 @@ namespace :letsencrypt do
   # ).freeze
 
   DOMAINS = %w(
-    mttrs.com.br
+    api.mtt.rs
   ).freeze
 
   desc 'Renew all certs'
@@ -33,7 +33,7 @@ namespace :letsencrypt do
     desc 'Create cert'
     task :create, :domain do |_t, args|
       domain = args[:domain]
-      on roles(:ssl) do
+      on roles(:ssl), in: :sequence do
         execute <<-CMD
           mkdir -p /tmp/letsencrypt/#{ domain }
           sudo chown -R garageborn:garageborn /var/log/letsencrypt /etc/letsencrypt/
