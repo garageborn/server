@@ -1,14 +1,10 @@
 namespace :letsencrypt do
-  # DOMAINS = %w(
-  #   mtt.rs
-  #   mttrs.com.br
-  #   api.mtt.rs
-  #   api.origin.mtt.rs
-  #   www.garageborn.com
-  # ).freeze
-
   DOMAINS = %w(
     mtt.rs
+    mttrs.com.br
+    api.mtt.rs
+    api.origin.mtt.rs
+    www.garageborn.com
   ).freeze
 
   desc 'Renew all certs'
@@ -60,7 +56,7 @@ namespace :letsencrypt do
 
     desc 'Commit certs'
     task :commit do |_t, domain|
-      system "git commit -a -m'#{ domain } certs created'"
+      system "git add . && git commit -a -m'#{ domain } certs created'"
     end
   end
 end
