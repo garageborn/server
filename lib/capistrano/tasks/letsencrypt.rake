@@ -1,7 +1,7 @@
 namespace :letsencrypt do
   DOMAINS = %w(
-    alpha.br.mtt.rs
-    alpha.mtt.rs
+    mtt.rs
+    mttrs.com.br
     api.mtt.rs
     api.origin.mtt.rs
     www.garageborn.com
@@ -11,6 +11,10 @@ namespace :letsencrypt do
   task :renew do
     DOMAINS.each do |domain|
       invoke 'letsencrypt:generate:run', domain
+      Rake::Task['letsencrypt:generate:run'].reenable
+      Rake::Task['letsencrypt:generate:create'].reenable
+      Rake::Task['letsencrypt:generate:download'].reenable
+      Rake::Task['letsencrypt:generate:commit'].reenable
     end
   end
 
@@ -25,18 +29,20 @@ namespace :letsencrypt do
     desc 'Create cert'
     task :create, :domain do |_t, args|
       domain = args[:domain]
-      execute "mkdir -p /tmp/letsencrypt/#{ domain }"
-      execute <<-CMD
-        /usr/bin/certbot certonly \
-          --text \
-          --non-interactive \
-          --agree-tos \
-          --email apps@garageborn.com \
-          --webroot \
-          -w /tmp/letsencrypt/#{ domain } \
-          -d #{ domain }
-      CMD
-      execute 'sudo chown garageborn:garageborn -R /etc/letsencrypt/'
+      on roles(:ssl) do
+        execute <<-CMD
+          mkdir -p /tmp/letsencrypt/#{ domain }
+          sudo chown -R garageborn:garageborn /var/log/letsencrypt /etc/letsencrypt/
+          letsencrypt certonly \
+            --text \
+            --non-interactive \
+            --agree-tos \
+            --email apps@garageborn.com \
+            --webroot \
+            -w /tmp/letsencrypt/#{ domain } \
+            -d #{ domain }
+        CMD
+      end
     end
 
     desc 'Download created certs'
@@ -53,7 +59,7 @@ namespace :letsencrypt do
 
     desc 'Commit certs'
     task :commit do |_t, domain|
-      system "git commit -a -m'#{ domain } certs created'"
+      system "git add . && git commit -a -m'#{ domain } certs created'"
     end
   end
 end
