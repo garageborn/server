@@ -11,7 +11,7 @@ namespace :letsencrypt do
   task :renew do
     DOMAINS.each do |domain|
       invoke 'letsencrypt:generate:run', domain
-      Rake::Task['letsencrypt:generate:run']
+      Rake::Task['letsencrypt:generate:run'].reenable
     end
   end
 
