@@ -1,7 +1,7 @@
 namespace :letsencrypt do
   DOMAINS = %w(
-    alpha.br.mtt.rs
-    alpha.mtt.rs
+    mtt.rs
+    mttrs.com.br
     api.mtt.rs
     api.origin.mtt.rs
     www.garageborn.com
