@@ -1,11 +1,14 @@
 namespace :letsencrypt do
+  # DOMAINS = %w(
+  #   mtt.rs
+  #   mttrs.com.br
+  #   api.mtt.rs
+  #   api.origin.mtt.rs
+  #   www.garageborn.com
+  # ).freeze
   DOMAINS = %w(
-    mtt.rs
-    mttrs.com.br
     api.mtt.rs
-    api.origin.mtt.rs
-    www.garageborn.com
-  ).freeze
+  ).freeze  
 
   desc 'Renew all certs'
   task :renew do
