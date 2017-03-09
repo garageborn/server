@@ -9,6 +9,7 @@ packages=(
   # system packages
   build-essential
   gcc
+  libicu-dev
   libpcre3
   libpcre3-dev
   libssl-dev
