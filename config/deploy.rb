@@ -1,4 +1,4 @@
-lock '3.7.2'
+lock '3.8.0'
 
 set :application, 'server'
 set :repo_url, 'git@github.com:garageborn/server.git'
