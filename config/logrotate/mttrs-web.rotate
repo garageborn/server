@@ -2,7 +2,8 @@
   su garageborn garageborn
   daily
   missingok
-  rotate 10
+  rotate 5
+  maxage 5
   compress
   delaycompress
   notifempty
