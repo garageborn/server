@@ -8,7 +8,7 @@ gem 'rake', '12.0.0'
 
 group :development do
   gem 'capistrano-bundler', '1.2.0', require: false
-  gem 'capistrano-rbenv', '2.1.0', require: false
-  gem 'capistrano', '3.8.0'
-  gem 'slackistrano', '3.1.0', require: false
+  gem 'capistrano-rbenv', '2.1.1', require: false
+  gem 'capistrano', '3.8.1'
+  gem 'slackistrano', '3.8.1', require: false
 end
