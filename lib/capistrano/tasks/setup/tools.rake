@@ -8,6 +8,7 @@ namespace :setup do
       invoke 'setup:tools:node'
       invoke 'setup:tools:nginx'
       invoke 'setup:tools:postgresql'
+      invoke 'setup:tools:datadog'
     end
 
     desc 'Install node'
@@ -35,6 +36,13 @@ namespace :setup do
     task :postgresql do
       on roles(:all) do
         run_script('tools/postgresql.sh')
+      end
+    end
+
+    desc 'Install datadog'
+    task :datadog do
+      on roles(:all) do
+        run_script('tools/datadog.sh')
       end
     end
   end
