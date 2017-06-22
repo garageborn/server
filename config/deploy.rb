@@ -1,5 +1,3 @@
-lock '3.8.1'
-
 set :application, 'server'
 set :repo_url, 'git@github.com:garageborn/server.git'
 set :keep_releases, 10
