@@ -1,16 +1,17 @@
 namespace :letsencrypt do
-  # DOMAINS = %w(
-  #   mtt.rs
-  #   mttrs.com.br
-  #   ar.mtt.rs
-  #   cl.mtt.rs
-  #   mx.mtt.rs
-  #   api.mtt.rs
-  #   api.origin.mtt.rs
-  #   www.garageborn.com
-  # ).freeze
-
   DOMAINS = %w(
+    api.mtt.rs
+    api.origin.mtt.rs
+    ar.mtt.rs
+    ar.origin.mtt.rs
+    cl.mtt.rs
+    cl.origin.mtt.rs
+    mtt.rs
+    origin.mtt.rs
+    mttrs.com.br
+    origin.mttrs.com.br
+    mx.mtt.rs
+    mx.origin.mtt.rs
     www.garageborn.com
   ).freeze
 
@@ -18,10 +19,6 @@ namespace :letsencrypt do
   task :renew do
     DOMAINS.each do |domain|
       invoke 'letsencrypt:generate:run', domain
-      Rake::Task['letsencrypt:generate:run'].reenable
-      Rake::Task['letsencrypt:generate:create'].reenable
-      Rake::Task['letsencrypt:generate:download'].reenable
-      Rake::Task['letsencrypt:generate:commit'].reenable
     end
   end
 
