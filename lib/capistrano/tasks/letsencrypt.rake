@@ -11,7 +11,7 @@ namespace :letsencrypt do
   # ).freeze
 
   DOMAINS = %w(
-    mtt.rs
+    api.origin.mtt.rs
   ).freeze
 
   desc 'Renew all certs'
