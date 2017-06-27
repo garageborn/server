@@ -12,6 +12,8 @@ namespace :letsencrypt do
     origin.mttrs.com.br
     mx.mtt.rs
     mx.origin.mtt.rs
+    pt.mtt.rs
+    pt.origin.mtt.rs
     www.garageborn.com
   ).freeze
 
