@@ -21,6 +21,7 @@ packages=(
   cron
   curl
   git-core
+  imagemagick
   htop
   screen
   vim
