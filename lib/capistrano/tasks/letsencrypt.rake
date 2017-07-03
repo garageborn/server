@@ -1,24 +1,28 @@
 namespace :letsencrypt do
+  # DOMAINS = %w(
+  #   api.mtt.rs
+  #   api.origin.mtt.rs
+  #   argentina.mtt.rs
+  #   argentina.origin.mtt.rs
+  #   australia.mtt.rs
+  #   australia.origin.mtt.rs
+  #   chile.mtt.rs
+  #   chile.origin.mtt.rs
+  #   estadosunidos.mtt.rs
+  #   estadosunidos.origin.mtt.rs
+  #   mexico.mtt.rs
+  #   mexico.origin.mtt.rs
+  #   mtt.rs
+  #   mttrs.com.br
+  #   origin.mtt.rs
+  #   origin.mttrs.com.br
+  #   portugal.mtt.rs
+  #   portugal.origin.mtt.rs
+  #   www.garageborn.com
+  # ).freeze
+
   DOMAINS = %w(
-    api.mtt.rs
-    api.origin.mtt.rs
-    argentina.mtt.rs
-    argentina.origin.mtt.rs
-    australia.mtt.rs
     australia.origin.mtt.rs
-    chile.mtt.rs
-    chile.origin.mtt.rs
-    estadosunidos.mtt.rs
-    estadosunidos.origin.mtt.rs
-    mexico.mtt.rs
-    mexico.origin.mtt.rs
-    mtt.rs
-    mttrs.com.br
-    origin.mtt.rs
-    origin.mttrs.com.br
-    portugal.mtt.rs
-    portugal.origin.mtt.rs
-    www.garageborn.com
   ).freeze
 
   desc 'Renew all certs'
