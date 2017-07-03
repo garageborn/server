@@ -23,6 +23,10 @@ namespace :letsencrypt do
 
   DOMAINS = %w(
     australia.origin.mtt.rs
+    chile.origin.mtt.rs
+    estadosunidos.origin.mtt.rs
+    mexico.origin.mtt.rs
+    portugal.origin.mtt.rs
   ).freeze
 
   desc 'Renew all certs'
