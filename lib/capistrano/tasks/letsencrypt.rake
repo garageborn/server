@@ -3,7 +3,6 @@ namespace :letsencrypt do
     api.mtt.rs
     api.origin.mtt.rs
     argentina.mtt.rs
-    argentina.origin.mtt.rs
     australia.mtt.rs
     australia.origin.mtt.rs
     chile.mtt.rs
