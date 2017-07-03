@@ -21,13 +21,7 @@ namespace :letsencrypt do
   #   www.garageborn.com
   # ).freeze
 
-  DOMAINS = %w(
-    australia.origin.mtt.rs
-    chile.origin.mtt.rs
-    estadosunidos.origin.mtt.rs
-    mexico.origin.mtt.rs
-    portugal.origin.mtt.rs
-  ).freeze
+  DOMAINS = %w(argentina.origin.mtt.rs)
 
   desc 'Renew all certs'
   task :renew do
