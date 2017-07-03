@@ -1,7 +1,17 @@
 namespace :letsencrypt do
   DOMAINS = %w(
+    api.mtt.rs
+    api.origin.mtt.rs
+    argentina.mtt.rs
+    argentina.origin.mtt.rs
+    australia.mtt.rs
+    australia.origin.mtt.rs
+    chile.mtt.rs
+    chile.origin.mtt.rs
     estadosunidos.mtt.rs
+    estadosunidos.origin.mtt.rs
     mexico.mtt.rs
+    mexico.origin.mtt.rs
     mtt.rs
     mttrs.com.br
     origin.mtt.rs
