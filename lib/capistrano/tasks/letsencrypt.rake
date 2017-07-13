@@ -32,8 +32,6 @@ namespace :letsencrypt do
   # ).freeze
 
   DOMAINS = %w(
-    canada.mtt.rs
-    deutschland.origin.mtt.rs
     deutschland.mtt.rs
     espana.origin.mtt.rs
     espana.mtt.rs
