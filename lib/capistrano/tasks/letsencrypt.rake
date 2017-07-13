@@ -33,7 +33,6 @@ namespace :letsencrypt do
 
   DOMAINS = %w(
     canada.mtt.rs
-    canada.origin.mtt.rs
     deutschland.origin.mtt.rs
     deutschland.mtt.rs
     espana.origin.mtt.rs
