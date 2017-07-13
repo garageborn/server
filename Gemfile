@@ -1,7 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'activesupport', '5.1.1'
-gem 'fog', '1.38.0'
+gem 'activesupport', '5.1.2'
+gem 'aws-sdk', '2.10.10'
+gem 'byebug', '9.0.6'
+gem 'figaro', '1.1.1'
+gem 'fog', '1.40.0'
 gem 'mime-types', '3.1'
 gem 'net-ssh', '4.1.0'
 gem 'rake', '12.0.0'

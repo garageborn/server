@@ -1,5 +1,4 @@
-require 'fog'
-require 'active_support/all'
+require ::File.expand_path('../../config/environment', __FILE__)
 
 class S3Upload
   attr_reader :prefix, :path, :s3_bucket_name, :expiry

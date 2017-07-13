@@ -1,3 +1,5 @@
+require ::File.expand_path('../../../../config/environment', __FILE__)
+
 namespace :letsencrypt do
   DOMAINS = %w(
     api.mtt.rs
@@ -28,6 +30,7 @@ namespace :letsencrypt do
       Rake::Task['letsencrypt:generate:run'].reenable
       Rake::Task['letsencrypt:generate:create'].reenable
       Rake::Task['letsencrypt:generate:download'].reenable
+      Rake::Task['letsencrypt:generate:acm_upload'].reenable
       Rake::Task['letsencrypt:generate:commit'].reenable
     end
   end
@@ -37,6 +40,7 @@ namespace :letsencrypt do
       domain = args[:domain]
       invoke 'letsencrypt:generate:create', domain
       invoke 'letsencrypt:generate:download', domain
+      invoke 'letsencrypt:generate:acm_upload', domain
       invoke 'letsencrypt:generate:commit', domain
     end
 
@@ -69,6 +73,12 @@ namespace :letsencrypt do
       on roles(:ssl) do
         download!(origin, destination, recursive: true)
       end
+    end
+
+    desc 'ACM upload'
+    task :acm_upload, :domain do |_t, args|
+      domain = args[:domain]
+      ACMUpload.new(domain).run
     end
 
     desc 'Commit certs'
