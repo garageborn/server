@@ -8,8 +8,14 @@ namespace :letsencrypt do
     argentina.origin.mtt.rs
     australia.mtt.rs
     australia.origin.mtt.rs
+    canada.mtt.rs
+    canada.origin.mtt.rs
     chile.mtt.rs
     chile.origin.mtt.rs
+    deutschland.mtt.rs
+    deutschland.origin.mtt.rs
+    espana.mtt.rs
+    espana.origin.mtt.rs
     estadosunidos.mtt.rs
     estadosunidos.origin.mtt.rs
     mexico.mtt.rs
@@ -20,6 +26,8 @@ namespace :letsencrypt do
     origin.mttrs.com.br
     portugal.mtt.rs
     portugal.origin.mtt.rs
+    unitedkingdom.mtt.rs
+    unitedkingdom.origin.mtt.rs
     www.garageborn.com
   ).freeze
 
