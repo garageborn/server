@@ -3,32 +3,6 @@ require ::File.expand_path('../../../../config/environment', __FILE__)
 namespace :letsencrypt do
   DOMAINS = %w(
     api.mtt.rs
-    api.origin.mtt.rs
-    argentina.mtt.rs
-    argentina.origin.mtt.rs
-    australia.mtt.rs
-    australia.origin.mtt.rs
-    canada.mtt.rs
-    canada.origin.mtt.rs
-    chile.mtt.rs
-    chile.origin.mtt.rs
-    deutschland.mtt.rs
-    deutschland.origin.mtt.rs
-    espana.mtt.rs
-    espana.origin.mtt.rs
-    estadosunidos.mtt.rs
-    estadosunidos.origin.mtt.rs
-    mexico.mtt.rs
-    mexico.origin.mtt.rs
-    mtt.rs
-    mttrs.com.br
-    origin.mtt.rs
-    origin.mttrs.com.br
-    portugal.mtt.rs
-    portugal.origin.mtt.rs
-    unitedkingdom.mtt.rs
-    unitedkingdom.origin.mtt.rs
-    www.garageborn.com
   ).freeze
 
   desc 'Renew all certs'
