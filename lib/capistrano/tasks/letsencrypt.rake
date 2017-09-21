@@ -4,8 +4,6 @@ namespace :letsencrypt do
   DOMAINS = %w(
     api.mtt.rs
     api.origin.mtt.rs
-    argentina.mtt.rs
-    argentina.origin.mtt.rs
     australia.mtt.rs
     australia.origin.mtt.rs
     canada.mtt.rs
