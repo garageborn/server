@@ -2,10 +2,6 @@ require ::File.expand_path('../../../../config/environment', __FILE__)
 
 namespace :letsencrypt do
   DOMAINS = %w(
-    api.mtt.rs
-    api.origin.mtt.rs
-    australia.mtt.rs
-    australia.origin.mtt.rs
     canada.mtt.rs
     canada.origin.mtt.rs
     chile.mtt.rs
